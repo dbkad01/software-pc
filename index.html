@@ -9,30 +9,46 @@
 *{
   box-sizing:border-box;
   font-family:"Segoe UI",system-ui,sans-serif;
+  scroll-behavior:smooth;
 }
 
+/* ✅ BODY (scroll bên phải chuẩn) */
 body{
   margin:0;
   min-height:100vh;
   background:#05060a;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;
   align-items:center;
   gap:18px;
-  padding-top:40px;
-  overflow-y: auto; /* Bật cuộn dọc khi nội dung dài */
-  direction: rtl; /* Đảo chiều để scrollbar sang trái */
+  padding:40px 0;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 
-/* Wrapper để giữ layout gốc */
-.content-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  direction: ltr; /* Giữ chiều từ trái sang phải cho nội dung */
+/* 🌊 Scrollbar đẹp */
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#0b0f18;
+}
+
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#00ccff,#0044ff);
+  border-radius:20px;
+  box-shadow:0 0 10px #00aaff88;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#33ddff,#3366ff);
+}
+
+/* Firefox */
+*{
+  scrollbar-width:thin;
+  scrollbar-color:#2a3245 #0b0f18;
 }
 
 /* 🔥 BG */
@@ -47,7 +63,7 @@ body{
   z-index:-1;
 }
 
-/* 🔽 NAV */
+/* NAV */
 .nav{
   width:420px;
   display:flex;
@@ -63,35 +79,28 @@ body{
   border-radius:14px;
   background:rgba(10,15,30,.75);
   backdrop-filter:blur(10px);
-  box-shadow:
-    0 0 20px #0077ff55,
-    inset 0 0 10px #00aaff33;
+  box-shadow:0 0 20px #0077ff33, inset 0 0 10px #00aaff22;
   transition:.15s ease;
 }
 
 .nav a:hover{
   transform:translateY(-2px) scale(1.05);
-  box-shadow:
-    0 0 32px #00aaffaa,
-    inset 0 0 16px #00ccff66;
 }
 
-/* 🃏 Card */
+/* CARD */
 .card{
   width:420px;
   padding:22px;
   border-radius:20px;
   background:rgba(10,15,30,.88);
   backdrop-filter:blur(14px);
-  box-shadow:
-    0 0 45px #0088ff66,
-    0 0 100px #0022ff33;
+  box-shadow:0 0 45px #0088ff33, 0 0 100px #0022ff22;
   display:flex;
   flex-direction:column;
   gap:20px;
 }
 
-/* Header */
+/* HEADER */
 .header{
   display:flex;
   align-items:center;
@@ -101,9 +110,9 @@ body{
 .header img{
   width:58px;
   height:58px;
-  border-radius:16px; /* bo như cũ */
+  border-radius:16px;
   object-fit:cover;
-  box-shadow:0 0 22px #00aaffaa;
+  box-shadow:0 0 16px #00aaff55;
 }
 
 .header h2{
@@ -118,13 +127,13 @@ body{
   color:#7fbfff;
 }
 
-/* Buttons */
+/* LINKS */
 .links{
   display:flex;
   flex-direction:column;
   gap:16px;
   padding-top:10px;
-  border-top:1px solid #00aaff33;
+  border-top:1px solid #00aaff22;
 }
 
 .link-btn{
@@ -137,40 +146,31 @@ body{
   font-weight:500;
   border-radius:16px;
   background:
-    radial-gradient(
-      180px circle at var(--x) var(--y),
-      #00ccff,
-      #0044ff,
-      #020417
-    );
-  box-shadow:
-    0 0 22px #00aaff55,
-    inset 0 0 12px #00ccff44;
+    radial-gradient(180px circle at var(--x) var(--y),
+    #00ccff, #0044ff, #020417);
+  box-shadow:0 0 18px #00aaff33, inset 0 0 10px #00ccff22;
   transition:.15s ease;
 }
 
 .link-btn:hover{
   transform:translateY(-2px) scale(1.04);
-  box-shadow:
-    0 0 36px #00ccffaa,
-    inset 0 0 18px #00ccff66;
 }
 
-/* 🖱 Cursor glow */
+/* Cursor glow */
 body::after{
   content:"";
   position:fixed;
   width:120px;
   height:120px;
   pointer-events:none;
-  background:radial-gradient(circle,#00aaff55,transparent 70%);
+  background:radial-gradient(circle,#00aaff33,transparent 70%);
   filter:blur(22px);
   transform:translate(-50%,-50%);
   left:var(--cx,50%);
   top:var(--cy,50%);
 }
 
-/* 📱 Mobile */
+/* Mobile */
 @media(max-width:480px){
   .card,.nav{width:92vw;}
 }
@@ -178,41 +178,39 @@ body::after{
 </head>
 
 <body>
+
 <div class="bg"></div>
 
-<div class="content-wrapper"> <!-- Thêm wrapper này -->
-  <div class="nav">
-    <a href="https://doanvanvien90.github.io/My-first-website/">Home</a>
-    <a href="https://doanvanvien90.github.io/FAQ">FAQ</a>
-  </div>
+<div class="nav">
+  <a href="https://doanvanvien90.github.io/My-first-website/">Home</a>
+  <a href="https://doanvanvien90.github.io/FAQ">FAQ</a>
+</div>
 
-  <div class="card">
-    <div class="header">
-      <!-- ✅ AVATAR LOCAL, KHÔNG BAY -->
-         <img src="https://avatars.githubusercontent.com/doanvanvien90" alt="avatar">
-      <div>
-        <h2>DevBlzAlphaK1dXD</h2>
-        <p>Developer × Designer × Content creator</p>
-      </div>
-    </div>
-
-    <div class="links">
-      <a class="link-btn" href="https://drive.google.com/file/d/152LX4IcDQnYAmguSZH1OvbQh0QEqldwq/view?usp=drive_link" target="_blank">Steam</a>
-      <a class="link-btn" href="https://apps.microsoft.com/detail/xpffh613w8v6lv?hl=vi-VN&gl=VN" target="_blank">OBS Studio</a>
-      <a class="link-btn" href="https://apps.microsoft.com/detail/xpff8q4zp7q321?hl=vi-VN&gl=VN" target="_blank">Custom Cursor</a>
-      <a class="link-btn" href="https://drive.google.com/file/d/1cGzsPl7tq0q986XjHrIdUbML_d1VeIST/view?usp=drive_link" target="_blank">Undertale</a>
-      <a class="link-btn" href="https://www.roblox.com/download" target="_blank">Roblox</a>
-      <a class="link-btn" href="https://www.capcut.cn/" target="_blank">JianYing(capcut china)</a>
+<div class="card">
+  <div class="header">
+    <img src="https://avatars.githubusercontent.com/doanvanvien90" alt="avatar">
+    <div>
+      <h2>DevBlzAlphaK1dXD</h2>
+      <p>Developer × Designer × Content creator</p>
     </div>
   </div>
-</div> <!-- Kết thúc wrapper -->
+
+  <div class="links">
+    <a class="link-btn" href="https://drive.google.com/" target="_blank">Steam</a>
+    <a class="link-btn" href="https://obsproject.com/" target="_blank">OBS Studio</a>
+    <a class="link-btn" href="#">Custom Cursor</a>
+    <a class="link-btn" href="#">Undertale</a>
+    <a class="link-btn" href="https://www.roblox.com/download" target="_blank">Roblox</a>
+    <a class="link-btn" href="https://www.capcut.com/" target="_blank">Capcut</a>
+  </div>
+</div>
 
 <script>
 document.querySelectorAll(".link-btn").forEach(btn=>{
   btn.addEventListener("mousemove",e=>{
     const r = btn.getBoundingClientRect();
-    btn.style.setProperty("--x",`${e.clientX - r.left}px`);
-    btn.style.setProperty("--y",`${e.clientY - r.top}px`);
+    btn.style.setProperty("--x",(e.clientX - r.left)+"px");
+    btn.style.setProperty("--y",(e.clientY - r.top)+"px");
   });
   btn.addEventListener("mouseleave",()=>{
     btn.style.setProperty("--x","50%");
@@ -225,5 +223,6 @@ document.addEventListener("mousemove",e=>{
   document.body.style.setProperty("--cy",e.clientY+"px");
 });
 </script>
+
 </body>
 </html>
